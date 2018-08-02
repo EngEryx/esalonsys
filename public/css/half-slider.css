@@ -1,0 +1,143 @@
+/*
+ * Styles
+ */
+html, body {
+
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.bg-dark {
+  background-color: #00bfbe!important;
+}
+
+.home-slider {
+  margin-top: 56px;
+}
+
+.our-schedule {
+  padding: 10px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  background-size: cover;
+  background: rgba(0,0,0,.60)
+}
+
+.our-schedule h2 {
+  color: #FFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.our-schedule .title {
+  color: #FFF;
+  padding: 5px;
+}
+.our-schedule .text {
+  padding: 2px;
+  color: gray;
+}
+.our-schedule .btn {
+  background-color: #00bfbe;
+  border: none;
+  border-radius: 0;
+  color: #fff !important;
+}
+.our-schedule .btn:hover {
+  border: 2px solid #00bfbe;
+  border-radius: 5px;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+.about-links a {
+  padding: 8px;
+  color: #00bfbe;
+  text-decoration: none;
+}
+.about-links a:hover {
+  text-decoration: underline;
+}
+.about-header .lead {
+  color: #000;
+}
+.about-header {
+  padding: 8px;
+}
+.about-content {
+  padding: 8px;
+  color: gray;
+}
+.book-btn {
+  border: none;
+  border-radius: 0;
+  background: #00bfbe;
+}
+.book-btn:hover {
+  background: #00bfbe !important;
+  box-shadow: -1px 1px 2px 0px #00bfbe;
+}
+.service-desc {
+  color: gray;
+}
+.service-desc span {
+  float: right;
+}
+.sale-item {
+  box-shadow: 0px 1px 3px 2px #e6e6e6;
+}
+.sale-item:hover {
+  box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.08);
+  -webkit-transition: all .4s;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
+  -o-transition: all .4s;
+  transition: all .5s;
+}
+
+.sale-item .card-img-top:hover {
+  box-shadow: 1px 0px 9px 2px #aba8a8;
+  transition: all .3s;
+}
+
+.form-divider {
+  position: absolute;
+  width: 1px;
+  border: 1px solid gray;
+  left: 50%;
+  right: 50%;
+  height: 100%;
+}
+
+.form-divider .divider-or {
+  position: absolute;
+  top: 48%;
+  background: #00bfbe;
+  left: -25px;
+  /* right: 50%; */
+  z-index: 9999;
+  width: 50px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  color: #FFF;
+}
+
+.carousel-item {
+  height: 80vh;
+  min-height: 300px;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
