@@ -26,7 +26,9 @@ class PaymentHelper
 
     private static function formatPhoneNumber($msisdn)
     {
-        return substr($msisdn,1);
+        return $msisdn;
+//        if(starts_with($msisdn,'+254')
+//        return substr($msisdn,1);
     }
 
     public function process($input)
@@ -46,7 +48,7 @@ class PaymentHelper
 
             $phone = self::formatPhoneNumber($input['msisdn']);
 
-            $person = User::query()->where('phone', $phone)->first();
+            $person = User::where('phone', $phone)->first();
 
             if(!is_null($person)){
                 $data['user_id'] = $person->id;
@@ -59,16 +61,18 @@ class PaymentHelper
             if (!is_null($person)){
 
                 #query the latest customer orders.
-                $order = Booking::where(['user_id'=>$person->id])->latest()->get()->first();
+                $order = Booking::where(['user_id'=>$person->id])->get()->first();
 
                 if($order){
                     $payment = Payment::create([
                         'receipt_no' => $mpesa->bill_ref_number,
-                        'customer_id' => auth()->user()->id,
+                        'customer_id' => $person->id,
                         'phone' => $mpesa->msisdn,
                         'booking_id' => $order->id,
                         'amount' => $mpesa->trans_amount
                     ]);
+                    $order->status = 1;
+                    $order->save();
                 }
             }
         });

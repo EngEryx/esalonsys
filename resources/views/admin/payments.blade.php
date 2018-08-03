@@ -36,19 +36,20 @@
                         <tbody>
                         @if($payments->count() == 0)
                             <tr class="text-center">
-                                <td colspan="9">No Payments available</td>
+                                <td colspan="10">No Payments available</td>
                             </tr>
                         @else
                             @foreach($payments as $payment)
                                 <tr>
                                     <td>{{$payment->id}}</td>
+                                    <td>{{$payment->id}}</td>
                                     <td>{{$payment->customer_name}}</td>
                                     <td>{{$payment->booking_name}}</td>
-                                    <td>{{$booking->status_text}}</td>
-                                    <td>{{$booking->amount_text}}</td>
-                                    <td>{{$booking->payment_details}}</td>
+                                    <td>{{$payment->status_text}}</td>
+                                    <td>{{$payment->amount_text}}</td>
+                                    <td>{{$payment->payment_details}}</td>
                                     <td>
-                                        {{ $booking->created_at }}
+                                        {{ $payment->created_at }}
                                     </td>
                                     <td>
                                         <a href="#" class="btn btn-xs"> <i class="fa fa-eye"></i> View Payment</a>
