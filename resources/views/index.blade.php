@@ -103,72 +103,23 @@
             </div>
             <div class="row ">
                 <div class="col-sm-12 col-md-12 card-columns">
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
+                    @if($products->count() == 0)
+                        <h2>We've not added our products yet, check back soon.</h2>
+                        @else
+                        @foreach($products as $product)
+                            <div class="card sale-item">
+                                <img class="card-img-top" src="{{$product->img_url}}" alt="Massage">
+                                <div class="card-body">
+                                    <h4>{{$product->name}}</h4>
+                                    <p class="service-desc">{{$product->short_description}} <span> {{$product->price_text}}</span></p>
+                                    <div class="purchase">
+                                        {!! $product->purchase_url !!}
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card sale-item">
-                        <img class="card-img-top" src="{{asset('img/service1.jpg')}}" alt="Massage">
-                        <div class="card-body">
-                            <h4>Hair Care Services</h4>
-                            <p class="service-desc">Professional Hair Care <span> KES2000/-</span></p>
-                            <div class="purchase">
-                                <a href="#" class="btn btn-primary btn-lg book-btn pull-right">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
 
                 </div>
             </div>

@@ -26,7 +26,7 @@
                     {{--<a href="{{url('/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                       document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -48,16 +48,16 @@
                 </li>
 
                 <li>
-                    <a href="{{url('admin/customers')}}"><i class="fa fa-table fa-fw"></i> Customers</a>
+                    <a href="{{url('admin/customers')}}"><i class="fa fa-users"></i> Customers</a>
                 </li>
                 <li>
-                    <a href="{{url('admin/products')}}"><i class="fa fa-edit fa-fw"></i> Produts</a>
+                    <a href="{{url('admin/products')}}"><i class="fa  fa-cart-plus"></i> Products</a>
                 </li>
                 <li>
-                    <a href="{{url('admin/bookings')}}"><i class="fa fa-edit fa-fw"></i> Bookings</a>
+                    <a href="{{url('admin/bookings')}}"><i class="fa fa-bookmark"></i> Bookings</a>
                 </li>
                 <li>
-                    <a href="{{url('admin/payments')}}"><i class="fa fa-edit fa-fw"></i> Payments</a>
+                    <a href="{{url('admin/payments')}}"><i class="fa fa-money"></i> Payments</a>
                 </li>
             </ul>
         </div>

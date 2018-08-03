@@ -17,12 +17,12 @@
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
+                            <div class="huge">{{$new_customers}}</div>
                             <div>New Customers!</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('admin.customers')}}">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -39,12 +39,12 @@
                             <i class="fa fa-tasks fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">12</div>
+                            <div class="huge">{{$new_bookings}}</div>
                             <div>New Bookings!</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('admin.bookings')}}">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -61,12 +61,12 @@
                             <i class="fa fa-shopping-cart fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">124</div>
+                            <div class="huge">{{$salon_items}}</div>
                             <div>Products & Services</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('admin.products')}}">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -83,12 +83,12 @@
                             <i class="fa fa-support fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">10</div>
+                            <div class="huge">{{$payments}}</div>
                             <div>Payments</div>
                         </div>
                     </div>
                 </div>
-                <a href="#">
+                <a href="{{route('admin.payments')}}">
                     <div class="panel-footer">
                         <span class="pull-left">View Details</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -103,13 +103,49 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i>Latest Bookings
+                    <i class="fa fa-bell"></i> Notifications : Recent Bookings
                     <div class="pull-right">
-
+                        <a href="{{route('admin.bookings')}}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> View</a>
                     </div>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer</th>
+                            <th>Item Ordered</th>
+                            <th>Order Status</th>
+                            <th>Cost</th>
+                            <th>Scheduled</th>
+                            <th>Created On</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if($bookings->count() == 0)
+                            <tr class="text-center">
+                                <td colspan="7">No Orders available</td>
+                            </tr>
+                        @else
+                            @foreach($bookings as $booking)
+                                <tr>
+                                    <td>{{$booking->id}}</td>
+                                    <td>{{$booking->customer_name}}</td>
+                                    <td>{{$booking->salonitem_name}}</td>
+                                    <td>{{$booking->status_text}}</td>
+                                    <td>{{$booking->price_text}}</td>
+                                    <td>
+                                        {{ $booking->created_at }}
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-xs"> <i class="fa fa-eye"></i> View Order</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        @endif
+                    </table>
 
                 </div>
                 <!-- /.panel-body -->

@@ -2,20 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
+use App\Payment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Show the application dashboard.
      *
@@ -23,6 +15,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $bookings = Booking::where('user_id',auth()->user()->id)->latest()->get();
+        return view('home',compact('bookings'));
+    }
+
+    public function payments()
+    {
+        $payments = Payment::where(['customer_id'=>auth()->user()->id])->latest()->get();
+        return view('payments',compact('payments'));
     }
 }
