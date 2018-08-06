@@ -24,7 +24,7 @@ class BookingController extends Controller
         if(!$booking){
             return redirect()->back()->withStatus('Sorry!Could not complete request at the moment.');
         }
-        return redirect()->route('home');
+        return redirect()->route('frontend.booking.view-pay', $booking);
     }
 
     public function viewBooking(Booking $booking)

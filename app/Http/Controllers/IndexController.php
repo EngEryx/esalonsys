@@ -19,6 +19,6 @@ class IndexController extends Controller
 
     public function products()
     {
-        return view('products')->with('products',SalonItem::where(['item_type'=>2])->get());
+        return view('products')->with('products',SalonItem::where(['item_type'=>1])->get());
     }
 }

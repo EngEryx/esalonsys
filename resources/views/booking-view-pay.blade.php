@@ -24,14 +24,14 @@
                                 Access Menu
                             </li>
                             <li class="list-group-item">
-                                <a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 1. Booking & Purchases</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 2. Payments</a>
+                                <a href="{{route('home')}}"><i class="glyphicon glyphicon-arrow-right"></i> << Booking & Purchases</a>
                             </li>
                             {{--<li class="list-group-item">--}}
-                            {{--<a href="#"></a>--}}
+                                {{--<a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 2. Payments</a>--}}
                             {{--</li>--}}
+                            <li class="list-group-item">
+                            <a href="#"></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -59,21 +59,34 @@
                                 <th>Status</th>
                                 <td>{!! $booking->status_text !!}</td>
                             </tr>
-                            <tr>
-                                <th>How To Pay</th>
-                                <td>
-                                    <ol class="center">
-                                        <li>Go to M-PESA on your Phone</li>
-                                        <li>Select Send Money</li>
-                                        <li>Enter phone number : <strong>0700xxxx</strong></li>
-                                        <li>Enter the amount, {!! $booking->price_text !!}</li>
-                                        <li>Enter your M-PESA PIN and send</li>
-                                        <li>
-                                            You will receive a confirmartion SMS from Us
-                                        </li>
-                                    </ol>
-                                </td>
-                            </tr>
+                            @if($booking->status == 0)
+                                <tr>
+                                    <th>How To Pay</th>
+                                    <td>
+                                        <ol class="center">
+                                            <li>Go to M-PESA on your Phone</li>
+                                            <li>Select Send Money</li>
+                                            <li>Enter phone number : <strong>0700xxxx</strong></li>
+                                            <li>Enter the amount, {!! $booking->price_text !!}</li>
+                                            <li>Enter your M-PESA PIN and send</li>
+                                            <li>
+                                                You will receive a confirmartion SMS from Us
+                                            </li>
+
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {{--<th></th>--}}
+                                    <td colspan="2">Refresh page to check if the payment has been processed.</td>
+                                </tr>
+                                @else
+                                <tr>
+                                    {{--<th></th>--}}
+                                    <td colspan="2">Payment Received. Confirmation Number: <strong>{{$booking->payment->receipt_no}}</strong></td>
+                                </tr>
+                            @endif
+
                         </table>
                     </div>
                 </div>

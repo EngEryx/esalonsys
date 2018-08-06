@@ -16,8 +16,8 @@ header('Access-Control-Allow-Headers: content-type,x-xsrf-token, X-Request-Signa
 Route::resource('/mnet/sms/gateway', 'GatewayAPI');
 
 Route::get('/', 'IndexController@index')->name('landing');
-Route::get('/products', 'IndexController@products');
-Route::get('/services', 'IndexController@services');
+Route::get('/products', 'IndexController@products')->name('index-products');
+Route::get('/services', 'IndexController@services')->name('index-services');
 
 
 Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){

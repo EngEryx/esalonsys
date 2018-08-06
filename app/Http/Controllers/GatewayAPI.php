@@ -75,6 +75,27 @@ class GatewayAPI extends Controller
                         'created_at' => Carbon::now()
                     ];
                     $this->helper->process($format);
+                    //
+
+					$sms = new Gateway\EnvayaSMS_OutgoingMessage();
+					$sms->id = uniqid();
+					$sms->to = $format['msisdn'];
+					$sms->message = "Dear, eSalon has received your payment. Receipt no. ".$format['bill_ref_number'];
+					$sms->type = Gateway\EnvayaSMS::MESSAGE_TYPE_SMS;
+					$sms->priority = 1;
+					$messages[] = $sms;
+
+                    $events = array();
+
+                    if ($messages)
+                    {
+                        $events[] = new Gateway\EnvayaSMS_Event_Send($messages);
+                    }
+
+//                    echo $request->render_response($events);
+                    return response()->json(array(
+                        "events"=>$events
+                    ));
                 }
 				return response()->json(array(
 					"events"=>null

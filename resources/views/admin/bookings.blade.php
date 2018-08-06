@@ -42,7 +42,7 @@
                                     <td>{{$booking->id}}</td>
                                     <td>{{$booking->customer_name}}</td>
                                     <td>{{$booking->salonitem_name}}</td>
-                                    <td>{{$booking->status_text}}</td>
+                                    <td>{!! $booking->status_text !!}</td>
                                     <td>{{$booking->price_text}}</td>
                                     <td>
                                         {{ $booking->created_at }}

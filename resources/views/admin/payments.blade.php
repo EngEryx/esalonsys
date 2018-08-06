@@ -25,8 +25,8 @@
                             <th>#</th>
                             <th>Receipt</th>
                             <th>Customer</th>
-                            <th>Order #.</th>
-                            <th>Payment Status</th>
+                            <th>Order Info.</th>
+                            {{--<th>Payment Status</th>--}}
                             <th>Amount</th>
                             <th>Other Details</th>
                             <th>Created On</th>
@@ -42,12 +42,12 @@
                             @foreach($payments as $payment)
                                 <tr>
                                     <td>{{$payment->id}}</td>
-                                    <td>{{$payment->id}}</td>
+                                    <td>{{$payment->receipt_no}}</td>
                                     <td>{{$payment->customer_name}}</td>
                                     <td>{{$payment->booking_name}}</td>
-                                    <td>{{$payment->status_text}}</td>
-                                    <td>{{$payment->amount_text}}</td>
-                                    <td>{{$payment->payment_details}}</td>
+                                    {{--<td>{{$payment->status_text}}</td>--}}
+                                    <td>{{$payment->amount}}</td>
+                                    <td>{{$payment->phone}}</td>
                                     <td>
                                         {{ $payment->created_at }}
                                     </td>

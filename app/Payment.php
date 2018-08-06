@@ -12,4 +12,16 @@ class Payment extends Model
     {
         return $this->hasOne(Booking::class,'id','booking_id');
     }
+
+    public function getBookingNameAttribute()
+    {
+        return $this->booking->booking_name;
+    }
+
+    public function getCustomerNameAttribute()
+    {
+        return $this->booking->customer->name;
+    }
+
+
 }

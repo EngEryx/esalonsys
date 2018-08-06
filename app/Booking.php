@@ -8,6 +8,10 @@ class Booking extends Model
 {
     protected $guarded = [];
 
+    public function payment()
+    {
+        return $this->hasOne(Payment::class,'booking_id','id');
+    }
     public function salonitem()
     {
         return $this->hasOne(SalonItem::class,'id','salon_item_id');
@@ -16,6 +20,11 @@ class Booking extends Model
     public function customer()
     {
         return $this->hasOne(User::class,'id','user_id');
+    }
+
+    public function getCustomerNameAttribute()
+    {
+        return $this->customer->name;
     }
 
     public function getSalonitemNameAttribute()
@@ -32,9 +41,9 @@ class Booking extends Model
     {
         switch ($this->status){
             case 1:
-                return "<i class='alert alert-success'>Paid</i>";
+                return "Paid";
             case 0:
-                return "<i class='alert alert-danger'>Un-Paid</i>";
+                return "Un-Paid";
         }
         return '';
     }
@@ -42,5 +51,10 @@ class Booking extends Model
     public function getViewUrlAttribute()
     {
         return route('frontend.booking.view-pay', $this);
+    }
+
+    public function getBookingNameAttribute()
+    {
+        return $this->id.' '.$this->salonitem_name;
     }
 }

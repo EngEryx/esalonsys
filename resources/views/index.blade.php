@@ -64,7 +64,7 @@
                             women offering hair-cutting, coloring, and other such type of services.</p>
                     </div>
                     <div class="about-links">
-                        <a href="#" class=""><i class="fa fa-arrow-right"></i> Our Products</a>
+                        <a href="{{route('index-products')}}" class=""><i class="fa fa-arrow-right"></i> Our Products</a>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4">
@@ -82,7 +82,7 @@
                                 <p class="text">10.00 AM - 5.00 PM</p>
                                 <p class="title">Sunday</p>
                                 <p class="text">Closed</p>
-                                <a class="btn btn-default btn-lg">Book Appointment</a>
+                                <a href="{{route('index-services')}}" class="btn btn-default btn-lg">Book Appointment</a>
                             </div>
                         </div>
                     </div>

@@ -19,20 +19,20 @@
             <br>
             <div class="row">
                 <div class="col-md-12">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            Access Menu
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 1. Booking & Purchases</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 2. Payments</a>
-                        </li>
+                    {{--<ul class="list-group">--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--Access Menu--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 1. Booking & Purchases</a>--}}
+                        {{--</li>--}}
+                        {{--<li class="list-group-item">--}}
+                            {{--<a href="#"><i class="glyphicon glyphicon-arrow-right"></i> 2. Payments</a>--}}
+                        {{--</li>--}}
                         {{--<li class="list-group-item">--}}
                         {{--<a href="#"></a>--}}
                         {{--</li>--}}
-                    </ul>
+                    {{--</ul>--}}
                 </div>
             </div>
         </div>

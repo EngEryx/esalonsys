@@ -61,7 +61,7 @@ class PaymentHelper
             if (!is_null($person)){
 
                 #query the latest customer orders.
-                $order = Booking::where(['user_id'=>$person->id])->get()->first();
+                $order = Booking::where(['user_id'=>$person->id,'status'=>0])->latest()->first();
 
                 if($order){
                     $payment = Payment::create([
@@ -73,6 +73,8 @@ class PaymentHelper
                     ]);
                     $order->status = 1;
                     $order->save();
+                }else{
+                    //the payment is just stored.
                 }
             }
         });
