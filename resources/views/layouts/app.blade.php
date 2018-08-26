@@ -98,7 +98,11 @@
                 </div>
             </div>
         </nav>
-
+            @if(session('status'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position:fixed; z-index: 99999; left:40%;">
+               {{session()->get('status')}}
+            </div>
+            @endif
         <main class="py-4">
             @yield('content')
         </main>

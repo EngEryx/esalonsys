@@ -34,7 +34,7 @@ class PaymentHelper
     public function process($input)
     {
         if($input['trans_amount'] == 0)
-            return;
+            return null;
 
         if(!PaymentConfirmation::query()->where(['trans_id'=>$input['trans_id']])->exists())
 
@@ -64,17 +64,34 @@ class PaymentHelper
                 $order = Booking::where(['user_id'=>$person->id,'status'=>0])->latest()->first();
 
                 if($order){
-                    $payment = Payment::create([
+
+                    $data = [
                         'receipt_no' => $mpesa->bill_ref_number,
                         'customer_id' => $person->id,
                         'phone' => $mpesa->msisdn,
                         'booking_id' => $order->id,
                         'amount' => $mpesa->trans_amount
-                    ]);
-                    $order->status = 1;
+                    ];
+
+                    $payment = Payment::query()->where(array_only($data,['customer_id','phone','booking_id']));
+
+                    if($payment->exists()){
+                        $payment = $payment->first();
+                        $payment->amount = ($payment->amount + $mpesa->trans_amount);
+                        $payment->save();
+                    }else{
+                        $payment = Payment::create($data);
+                    }
+
+                    //Update the booking
+                    $order->amount = ($order->amount - $payment->amount);
+
+                    $order->status->status = $order->amount <= 0 ? 1 : 0;
                     $order->save();
+                    return $order;
                 }else{
                     //the payment is just stored.
+                    return null;
                 }
             }
         });

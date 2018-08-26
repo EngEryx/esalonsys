@@ -105,6 +105,18 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="location">{{ __('Delivery Location') }}</label>
+
+                                    <input id="location" type="text" class="form-control{{ $errors->has('location') ? ' is-invalid' : '' }}" name="location" value="{{ old('location') }}">
+
+                                    @if ($errors->has('location'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('location') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
                                     <label for="email">{{ __('E-Mail Address') }}</label>
 
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>

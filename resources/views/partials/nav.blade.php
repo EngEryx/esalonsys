@@ -39,9 +39,14 @@
                         </a>
                     @endif
                 </li>
-                {{--<li class="nav-item">--}}
-                    {{--<a class="nav-link" href="#">Contact</a>--}}
-                {{--</li>--}}
+                @if(auth()->check())
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{route('feedback')}}">
+                       Feedback
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                @endif
             </ul>
         </div>
     </div>

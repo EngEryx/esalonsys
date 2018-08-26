@@ -28,9 +28,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){
     Route::get('products', 'AdminController@products')->name('admin.products');
     Route::view('products/add-new', 'admin.products-create')->name('admin.products.add');
     Route::post('products/add-save', 'AdminController@saveProduct')->name('admin.products.save');
+    Route::post('products/{salonitem}/delete', 'AdminController@deleteProduct')->name('admin.products.delete');
+    Route::get('products/{salonitem}/edit', 'AdminController@editProduct')->name('admin.products.edit');
+    Route::post('products/{salonitem}/edit/save', 'AdminController@saveEditProduct')->name('admin.products.edit.save');
 });
 
 Route::group(['middleware'=>'auth'],function(){
+
     //Customer dashboard.
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -39,7 +43,19 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/booking/{salonitem}/new-confirm', 'BookingController@bookconfirm')->name('frontend.booking.new-confirm');
     Route::get('/booking/{booking}/view/pay', 'BookingController@viewBooking')->name('frontend.booking.view-pay');
 
+    Route::view('/new/feedback', 'feedback')->name('feedback');
+    Route::post('/feedback/save', 'IndexController@feedback')->name('feedback.save');
+
 });
 
 Auth::routes();
+
+Route::group(['namespace' => 'Auth'], function(){
+    Route::get('registration/{token}/verify', 'RegisterController@verifyUser')->name('user.email.verify');
+});
+
+Route::get('/test', function(){
+    session()->flash('status',"erterterterttt");
+    return redirect('/');
+});
 

@@ -59,6 +59,10 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="{{asset('admin/js/sb-admin-2.js')}}"></script>
+<script src="{{asset('js/sweetalert.min.js')}}"></script>
+<script src="{{asset('js/axios.min.js')}}"></script>
+
+@yield('javascripts')
 
 </body>
 

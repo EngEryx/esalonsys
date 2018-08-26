@@ -66,7 +66,7 @@ class GatewayAPI extends Controller
                         'trans_type' => 'SMS',
                         'trans_id' => $parts[0],
                         'trans_time' => '?',
-                        'business_short_code' => '0721998374',
+                        'business_short_code' => '0705919296',
                         'invoice_no' => 'invoice',
                         'org_account_bal' => '0',
                         'third_party_trans_id' => '?',
@@ -74,16 +74,24 @@ class GatewayAPI extends Controller
                         'kyc_name' => $parts[6].' '.$parts[7],
                         'created_at' => Carbon::now()
                     ];
-                    $this->helper->process($format);
-                    //
 
-					$sms = new Gateway\EnvayaSMS_OutgoingMessage();
-					$sms->id = uniqid();
-					$sms->to = $format['msisdn'];
-					$sms->message = "Dear, eSalon has received your payment. Receipt no. ".$format['bill_ref_number'];
-					$sms->type = Gateway\EnvayaSMS::MESSAGE_TYPE_SMS;
-					$sms->priority = 1;
-					$messages[] = $sms;
+                    $order = $this->helper->process($format);
+
+                    if($order !=null){
+                        $message = "Dear customer, ";
+                        if($order->amount <= 0){
+                            $message = " eSalon has received your payment. ";
+                        }else{
+                            $message = "the amount you have paid is ".$order->balance." less. Top up to complete payment.";
+                        }
+                        $sms = new Gateway\EnvayaSMS_OutgoingMessage();
+                        $sms->id = uniqid();
+                        $sms->to = $format['msisdn'];
+                        $sms->message = $message." Receipt no: ".$format['bill_ref_number'];
+                        $sms->type = Gateway\EnvayaSMS::MESSAGE_TYPE_SMS;
+                        $sms->priority = 1;
+                        $messages[] = $sms;
+                    }
 
                     $events = array();
 

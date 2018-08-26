@@ -30,6 +30,22 @@ class SalonItem extends Model
 
     public function getCheckoutUrlAttribute()
     {
-        return '<a href="'.route('frontend.booking.new-confirm', $this).'" class="btn btn-success btn-lg book-btn pull-right">Checkout Item</a>';
+        return '<a href="'.route('frontend.booking.new-confirm', $this).'" class="btn btn-success btn-xs book-btn"> Checkout Item</a>';
+    }
+
+    public function getDeleteBtnAttribute()
+    {
+        return '<a href="#" onclick="deleteSalonItem('.$this->id.',\''.route("admin.products.delete", $this).'\')" class="btn btn-danger btn-xs book-btn"> Delete </a>';
+    }
+
+    public function getEditItemAttribute()
+    {
+        return '<a href="'.route('admin.products.edit', $this).'" class="btn btn-primary btn-xs"> Edit </a>';
+    }
+
+    public function getActionButtonsAttribute()
+    {
+        return $this->getEditItemAttribute()
+            .$this->getDeleteBtnAttribute();
     }
 }

@@ -68,4 +68,44 @@ class AdminController extends Controller
         $bookings = Booking::all();
         return view('admin.bookings')->with('bookings',$bookings);
     }
+
+    public function deleteProduct(SalonItem $salonitem)
+    {
+        try {
+            $salonitem->delete();
+        } catch (\Exception $e) {
+        }
+        return response()->json(['success' => true]);
+    }
+
+    public function editProduct(SalonItem $salonitem)
+    {
+        return view('admin.products-edit', compact('salonitem'));
+    }
+
+    public function saveEditProduct(SalonItem $salonitem, Request $request)
+    {
+        $this->validate($request,[
+            'name' => 'required|unique:salon_items,id,'.$salonitem->id.'|max:191',
+            'short_description' => 'required|max:191',
+            'long_description' => 'required',
+            'price' => 'required|numeric',
+            'item_type' => 'required',
+            'img_url' => 'file|image',
+        ]);
+
+        $data = $request->all();
+
+        if($request->hasFile('img_url')){
+            $file_name = time().'.'.$request->file('img_url')->getClientOriginalExtension();
+            $request->file('img_url')->move(public_path('uploads'),$file_name);
+            $url = url('/uploads').'/'.$file_name;
+            $data = $request->except('img_url');
+            $data['img_url'] = $url;
+        }
+
+        $salonitem->update($data);
+
+        return redirect()->route("admin.products")->withStatus('Product updated successfully!');
+    }
 }
