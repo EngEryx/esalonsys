@@ -46,6 +46,14 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    @if(auth()->user()->user_type == 0)
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{url('admin/dashboard')}}">
+                                Admin Dashboard
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                    @endif
                     <li class="nav-item active">
                     <a class="nav-link" href="{{route('frontend.booking.view-cart')}}">
                         View Cart (
