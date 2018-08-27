@@ -37,9 +37,7 @@ class PaymentHelper
             return null;
 
         if(!PaymentConfirmation::query()->where(['trans_id'=>$input['trans_id']])->exists())
-
-            DB::transaction(function() use ($input){
-
+        {
             #payment confirmation
             $data = $input;
 
@@ -86,7 +84,7 @@ class PaymentHelper
                     //Update the booking
                     $order->amount = ($order->amount - $payment->amount);
 
-                    $order->status->status = $order->amount <= 0 ? 1 : 0;
+                    $order->status = $order->amount <= 0 ? 1 : 0;
                     $order->save();
                     return $order;
                 }else{
@@ -94,6 +92,6 @@ class PaymentHelper
                     return null;
                 }
             }
-        });
+        }
     }
 }

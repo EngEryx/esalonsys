@@ -66,14 +66,22 @@
                                 @foreach($bookings as $booking)
                                     <tr>
                                         <td>{{$booking->id}}</td>
-                                        <td>{{$booking->salonitem_name}}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach(session()->get('customer_cart'.auth()->user()->id) as $cart_item)
+                                                    <li>
+                                                        {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
                                         <td>{!! $booking->status_text !!}</td>
-                                        <td>{!! $booking->price_text !!}</td>
+                                        <td>KSh.{!! $booking->total_cost !!}</td>
                                         <td>
                                             {{ $booking->created_at }}
                                         </td>
                                         <td>
-                                            <a href="{{$booking->view_url}}" class="btn btn-xs"> <i class="fa fa-eye"></i> View Order</a>
+                                            <a href="{{$booking->view_url}}" class="btn btn-primary btn-xs"> <i class="fa fa-eye"></i> View Order</a>
                                         </td>
                                     </tr>
                                 @endforeach

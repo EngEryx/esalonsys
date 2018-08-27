@@ -40,9 +40,22 @@
                     @endif
                 </li>
                 @if(auth()->check())
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{route('feedback')}}">
-                       Feedback
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('feedback')}}">
+                           Feedback
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                    <a class="nav-link" href="{{route('frontend.booking.view-cart')}}">
+                        View Cart (
+                        @if(session()->exists('customer_cart'.auth()->user()->id))
+                                {{ count(session()->get('customer_cart'.auth()->user()->id)) }}
+                        @else
+                            0
+                        @endif
+
+                        )
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>

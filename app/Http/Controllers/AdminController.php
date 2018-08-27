@@ -7,6 +7,8 @@ use App\Payment;
 use App\SalonItem;
 use App\User;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -17,7 +19,7 @@ class AdminController extends Controller
         $new_bookings = Booking::whereDate('created_at','>=',Carbon::today())->count();
         $salon_items = SalonItem::whereDate('created_at','>=',Carbon::today())->count();
         $payments = Payment::whereDate('created_at','>=',Carbon::today())->sum('amount');
-        $bookings = Booking::where('created_at','>=',Carbon::today());
+        $bookings = Booking::where('created_at','>=',Carbon::today())->get();
         return view('admin.dashboard', compact('new_customers','bookings','new_bookings','payments','salon_items'));
     }
 
@@ -107,5 +109,18 @@ class AdminController extends Controller
         $salonitem->update($data);
 
         return redirect()->route("admin.products")->withStatus('Product updated successfully!');
+    }
+
+    public function downloadBookings()
+    {
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('print.booking-report')->with([
+            'bookings' => Booking::all()
+        ]));
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        return $dompdf->stream(Carbon::today()->format('d M Y'));
     }
 }

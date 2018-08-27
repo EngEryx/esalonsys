@@ -8,14 +8,18 @@ class Booking extends Model
 {
     protected $guarded = [];
 
+    protected $casts = [
+        'items' => 'array'
+    ];
+
     public function payment()
     {
         return $this->hasOne(Payment::class,'booking_id','id');
     }
-    public function salonitem()
-    {
-        return $this->hasOne(SalonItem::class,'id','salon_item_id');
-    }
+//    public function salonitem()
+//    {
+//        return $this->hasOne(SalonItem::class,'id','salon_item_id');
+//    }
 
     public function customer()
     {
@@ -27,15 +31,15 @@ class Booking extends Model
         return $this->customer->name;
     }
 
-    public function getSalonitemNameAttribute()
-    {
-        return $this->salonitem->name;
-    }
-
-    public function getPriceTextAttribute()
-    {
-        return $this->salonitem->price_text;
-    }
+//    public function getSalonitemNameAttribute()
+//    {
+//        return $this->salonitem->name;
+//    }
+//
+//    public function getPriceTextAttribute()
+//    {
+//        return $this->salonitem->price_text;
+//    }
 
     public function getStatusTextAttribute()
     {

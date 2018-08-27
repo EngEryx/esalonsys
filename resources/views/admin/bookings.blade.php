@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i>Customer Orders/Bookings
                     <div class="pull-right">
-
+                        <a href="{{route('admin.print-bookings')}}" class="btn btn-success btn-xs"><i class="fa fa-print"></i> Download Report</a>
                     </div>
                 </div>
                 <!-- /.panel-heading -->
@@ -24,11 +24,11 @@
                         <tr>
                             <th>#</th>
                             <th>Customer</th>
-                            <th>Item Ordered</th>
+                            <th>Items Ordered</th>
                             <th>Order Status</th>
                             <th>Cost</th>
-                            <th>Scheduled</th>
-                            <th>Created On</th>
+                            <th>Date Placed</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -41,9 +41,17 @@
                                 <tr>
                                     <td>{{$booking->id}}</td>
                                     <td>{{$booking->customer_name}}</td>
-                                    <td>{{$booking->salonitem_name}}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach(session()->get('customer_cart'.auth()->user()->id) as $cart_item)
+                                                <li>
+                                                    {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td>{!! $booking->status_text !!}</td>
-                                    <td>{{$booking->price_text}}</td>
+                                    <td>{{$booking->total_cost}}</td>
                                     <td>
                                         {{ $booking->created_at }}
                                     </td>
@@ -68,3 +76,11 @@
     </div>
     <!-- /.row -->
 @endsection
+
+@section('javascript')
+    <script>
+        function confirmBooking(){
+
+        }
+    </script>
+    @endsection

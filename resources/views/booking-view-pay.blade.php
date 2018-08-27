@@ -52,8 +52,16 @@
                                 <td>{{$booking->salonitem_name}}</td>
                             </tr>
                             <tr>
-                                <th>Short Description</th>
-                                <td>{{$booking->salonitem_name}}</td>
+                                <th>Items Ordered</th>
+                                <td>
+                                    <ul>
+                                    @foreach(session()->get('customer_cart'.auth()->user()->id) as $cart_item)
+                                        <li>
+                                            {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Status</th>
@@ -67,7 +75,7 @@
                                             <li>Go to M-PESA on your Phone</li>
                                             <li>Select Send Money</li>
                                             <li>Enter phone number : <strong>0700xxxx</strong></li>
-                                            <li>Enter the amount, {!! $booking->price_text !!}</li>
+                                            <li>Enter the amount, KSh.<strong>{!! $booking->total_cost !!}</strong></li>
                                             <li>Enter your M-PESA PIN and send</li>
                                             <li>
                                                 You will receive a confirmartion SMS from Us
@@ -75,6 +83,10 @@
 
                                         </ol>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <th>Total Cost</th>
+                                    <td>KSh. {{$booking->total_cost}}</td>
                                 </tr>
                                 <tr>
                                     {{--<th></th>--}}

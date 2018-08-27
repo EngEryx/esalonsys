@@ -55,7 +55,8 @@ class GatewayAPI extends Controller
 		switch ($action->type)
 		{
 		    case Gateway\EnvayaSMS::ACTION_INCOMING:
-		        $type = strtoupper($action->message_type);
+                $events = array();
+                $type = strtoupper($action->message_type);
 		        Log::info("MNET Received: {$type} from: {$action->from} message: {$action->message}");
 		        if($action->from == 'MPESA' || Str::endsWith($action->from,'743169027')){
 		            $parts = explode(" ", $action->message);
@@ -76,13 +77,12 @@ class GatewayAPI extends Controller
                     ];
 
                     $order = $this->helper->process($format);
-
                     if($order !=null){
                         $message = "Dear customer, ";
                         if($order->amount <= 0){
-                            $message = " eSalon has received your payment. ";
+                            $message .= " eSalon has received your payment. ";
                         }else{
-                            $message = "the amount you have paid is ".$order->balance." less. Top up to complete payment.";
+                            $message .= "the amount you have paid is KSh.".$order->amount." less. Top up to complete payment.";
                         }
                         $sms = new Gateway\EnvayaSMS_OutgoingMessage();
                         $sms->id = uniqid();
@@ -91,23 +91,16 @@ class GatewayAPI extends Controller
                         $sms->type = Gateway\EnvayaSMS::MESSAGE_TYPE_SMS;
                         $sms->priority = 1;
                         $messages[] = $sms;
-                    }
-
-                    $events = array();
-
-                    if ($messages)
-                    {
+//                        if($messages)
+//                        {
+//                        }
                         $events[] = new Gateway\EnvayaSMS_Event_Send($messages);
-                    }
 
-//                    echo $request->render_response($events);
-                    return response()->json(array(
-                        "events"=>$events
-                    ));
+                    }
                 }
-				return response()->json(array(
-					"events"=>null
-				));
+                return response()->json(array(
+                    "events"=>$events
+                ));
 		        
 		    case Gateway\EnvayaSMS::ACTION_OUTGOING:
 		        $messages = array();

@@ -26,6 +26,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){
     Route::get('customers', 'AdminController@customers')->name('admin.customers');
     Route::get('payments', 'AdminController@payments')->name('admin.payments');
     Route::get('products', 'AdminController@products')->name('admin.products');
+    Route::get('bookings/print', 'AdminController@downloadBookings')->name('admin.print-bookings');
     Route::view('products/add-new', 'admin.products-create')->name('admin.products.add');
     Route::post('products/add-save', 'AdminController@saveProduct')->name('admin.products.save');
     Route::post('products/{salonitem}/delete', 'AdminController@deleteProduct')->name('admin.products.delete');
@@ -33,18 +34,22 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){
     Route::post('products/{salonitem}/edit/save', 'AdminController@saveEditProduct')->name('admin.products.edit.save');
 });
 
-Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>['auth','clients']],function(){
 
     //Customer dashboard.
     Route::get('/home', 'HomeController@index')->name('home');
 
     #Booking
     Route::get('/booking/{salonitem}/new', 'BookingController@book')->name('frontend.booking.new');
+    Route::post('/booking/{salonitem}/add/cart', 'BookingController@AddToCart')->name('frontend.booking.add-to-cart');
     Route::get('/booking/{salonitem}/new-confirm', 'BookingController@bookconfirm')->name('frontend.booking.new-confirm');
     Route::get('/booking/{booking}/view/pay', 'BookingController@viewBooking')->name('frontend.booking.view-pay');
 
     Route::view('/new/feedback', 'feedback')->name('feedback');
     Route::post('/feedback/save', 'IndexController@feedback')->name('feedback.save');
+
+    Route::get('/booking/view/cart', 'BookingController@ViewCart')->name('frontend.booking.view-cart');
+    Route::get('/booking/checkout/cart', 'BookingController@CheckoutCart')->name('frontend.booking.checkout-cart');
 
 });
 
@@ -56,6 +61,7 @@ Route::group(['namespace' => 'Auth'], function(){
 
 Route::get('/test', function(){
     session()->flash('status',"erterterterttt");
+    session()->forget('customer_cart'.auth()->user()->id);
     return redirect('/');
 });
 
