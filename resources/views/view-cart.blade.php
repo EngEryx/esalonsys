@@ -51,9 +51,11 @@
                                 <div class="col-md-6">
 
                                 </div>
+                                @if(session()->exists('customer_cart'.auth()->user()->id))
                                 <div class="col-md-3 ">
                                     <a href="{{route('frontend.booking.checkout-cart')}}" class="btn btn-success pull-left"><i class="fa fa-shopping-cart"></i>Checkout Cart</a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>

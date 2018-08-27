@@ -133,11 +133,10 @@
                                     <td>{{$booking->customer_name}}</td>
                                     <td>
                                         <ul>
-                                            @php $cart_items = session()->get('customer_cart'.auth()->user()->id) ?: [] @endphp
 
-                                        @foreach($cart_items as $cart_item)
+                                        @foreach($booking->items as $cart_item)
                                                 <li>
-                                                    {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                                    {{$cart_item['item']['name'] .' - '.($cart_item['item']['price'].' x '.(int)$cart_item['quantity'])}}
                                                 </li>
                                             @endforeach
                                         </ul>

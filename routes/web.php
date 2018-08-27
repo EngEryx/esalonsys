@@ -1,4 +1,9 @@
 <?php
+
+use Carbon\Carbon;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Credentials: true');
 header('Access-Control-Allow-Headers: content-type,x-xsrf-token, X-Request-Signature');
@@ -32,6 +37,33 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){
     Route::post('products/{salonitem}/delete', 'AdminController@deleteProduct')->name('admin.products.delete');
     Route::get('products/{salonitem}/edit', 'AdminController@editProduct')->name('admin.products.edit');
     Route::post('products/{salonitem}/edit/save', 'AdminController@saveEditProduct')->name('admin.products.edit.save');
+    Route::get('feedback',function(){
+        $feedbacks = \App\Feedback::all();
+        return view('admin.feedback',compact('feedbacks'));
+    });
+    Route::get('feedback/print', function(){
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('print.feedback-report')->with([
+            'feedbacks' => \App\Feedback::all()
+        ]));
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        return $dompdf->stream(Carbon::today()->format('d M Y'));
+    })->name('admin.print-feedback');
+
+    Route::get('payment/print', function(){
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+        $dompdf = new Dompdf($options);
+        $dompdf->loadHtml(view('print.payment-report')->with([
+            'payments' => \App\Payment::all()
+        ]));
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+        return $dompdf->stream(Carbon::today()->format('d M Y'));
+    })->name('admin.print-payments');
 });
 
 Route::group(['middleware'=>['auth','clients']],function(){

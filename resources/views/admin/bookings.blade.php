@@ -28,7 +28,7 @@
                             <th>Order Status</th>
                             <th>Cost</th>
                             <th>Date Placed</th>
-                            <th>Action</th>
+                            {{--<th>Action</th>--}}
                         </tr>
                         </thead>
                         <tbody>
@@ -43,11 +43,9 @@
                                     <td>{{$booking->customer_name}}</td>
                                     <td>
                                         <ul>
-                                            @php $cart_items = session()->get('customer_cart'.auth()->user()->id) ?: [] @endphp
-
-                                        @foreach($cart_items as $cart_item)
+                                        @foreach($booking->items as $cart_item)
                                                 <li>
-                                                    {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                                    {{$cart_item['item']['name'] .' - '.($cart_item['item']['price'].' x '.(int)$cart_item['quantity'])}}
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -57,9 +55,9 @@
                                     <td>
                                         {{ $booking->created_at }}
                                     </td>
-                                    <td>
-                                        <a href="#" class="btn btn-xs"> <i class="fa fa-eye"></i> View Order</a>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<a href="#" class="btn btn-xs"> <i class="fa fa-eye"></i> View Order</a>--}}
+                                    {{--</td>--}}
                                 </tr>
                             @endforeach
                         </tbody>

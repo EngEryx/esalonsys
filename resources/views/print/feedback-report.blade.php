@@ -6,41 +6,31 @@
     {{--<link rel="stylesheet" href="{{asset("pdf/style.css")}}" media="all" />--}}
 </head>
 <body>
-<h3>eSalon Service and Product Sales</h3>
+<h3>eSalon : Customer Feedback</h3>
 <table border="1" cellspacing="0" cellpadding="0" width="100%">
     <thead>
     <tr>
         <th>#</th>
-        <th>Customer</th>
-        <th>Items Ordered</th>
-        <th>Order Status</th>
-        <th>Cost</th>
+        <th>Type</th>
+        <th>Message</th>
         <th>Date Placed</th>
     </tr>
     </thead>
     <tbody>
-    @if($bookings->count() == 0)
+    @if($feedbacks->count() == 0)
         <tr class="text-center">
-            <td colspan="7">No Orders available</td>
+            <td colspan="7">No Feedback available</td>
         </tr>
     @else
-        @foreach($bookings as $booking)
+        @foreach($feedbacks as $feedback)
             <tr>
-                <td>{{$booking->id}}</td>
-                <td>{{$booking->customer_name}}</td>
+                <td>{{$feedback->id}}</td>
+                <td>{{$feedback->feed_type ==1 ? 'Comment' : 'Suggestion'}}</td>
                 <td>
-                    <ul>
-                        @foreach($booking->items as $cart_item)
-                            <li>
-                                {{$cart_item['item']['name'] .' - '.($cart_item['item']['price'].' x '.(int)$cart_item['quantity'])}}
-                            </li>
-                        @endforeach
-                    </ul>
+                   {{$feedback->message}}
                 </td>
-                <td>{!! $booking->status_text !!}</td>
-                <td>{{$booking->total_cost}}</td>
                 <td>
-                    {{ $booking->created_at }}
+                    {{ $feedback->created_at }}
                 </td>
             </tr>
         @endforeach

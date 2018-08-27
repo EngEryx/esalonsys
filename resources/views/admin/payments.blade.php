@@ -14,7 +14,7 @@
                 <div class="panel-heading">
                     <i class="fa fa-bar-chart-o fa-fw"></i>All Payments
                     <div class="pull-right">
-
+                        <a href="{{route('admin.print-payments')}}" class="btn btn-success btn-xs"><i class="fa fa-print"></i> Download Report</a>
                     </div>
                 </div>
                 <!-- /.panel-heading -->
@@ -30,7 +30,6 @@
                             <th>Amount</th>
                             <th>Other Details</th>
                             <th>Created On</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,9 +49,6 @@
                                     <td>{{$payment->phone}}</td>
                                     <td>
                                         {{ $payment->created_at }}
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-xs"> <i class="fa fa-eye"></i> View Payment</a>
                                     </td>
                                 </tr>
                             @endforeach

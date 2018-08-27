@@ -82,6 +82,8 @@ class BookingController extends Controller
     public function CheckoutCart()
     {
         $cart_items = session()->get('customer_cart'.auth()->user()->id);
+        if($cart_items == null)
+            return redirect()->back();
 
         $tcost = 0; $qty=0;
 

@@ -55,11 +55,18 @@
                                 <th>Items Ordered</th>
                                 <td>
                                     <ul>
-                                        @php $cart_items = session()->get('customer_cart'.auth()->user()->id) ?: [] @endphp
-
-                                    @foreach($cart_items as $cart_item)
+                                        @php $has_product = false @endphp
+                                        @php $has_service = false @endphp
+                                       @foreach($booking->items as $cart_item)
                                         <li>
-                                            {{$cart_item['item']->name .' - '.($cart_item['item']->price.' x '.(int)$cart_item['quantity'])}}
+                                            @php
+                                                if($cart_item['type']==1 && !$has_service){
+                                                $has_product = true;
+                                                }else{
+                                                $has_service = true;
+                                                }
+                                            @endphp
+                                            {{$cart_item['item']['name'] .' - '.($cart_item['item']['price'].' x '.(int)$cart_item['quantity'])}}
                                         </li>
                                         @endforeach
                                     </ul>
@@ -90,6 +97,12 @@
                                     <th>Total Cost</th>
                                     <td>KSh. {{$booking->total_cost}}</td>
                                 </tr>
+                                @if($has_product && !$has_service)
+                                    <tr>
+                                        <th>Delivery Location
+                                        <td>{{auth()->user()->location}}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     {{--<th></th>--}}
                                     <td colspan="2">Refresh page to check if the payment has been processed.</td>

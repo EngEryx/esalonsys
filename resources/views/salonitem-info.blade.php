@@ -41,7 +41,7 @@
 
                             <div class="row">
                                 <div class="col-md-4">
-                                    <a href="#" class="btn btn-success pull-left"><i class="fa fa-shopping-cart"></i>Checkout Cart</a>
+                                    <a href="{{route('landing')}}" class="btn btn-success pull-left"><i class="fa fa-shopping-cart"></i>Continue Shopping</a>
                                 </div>
                                 <div class="col-md-8">
                                     <form action="{{route('frontend.booking.add-to-cart',$salonitem)}}" method="post">
