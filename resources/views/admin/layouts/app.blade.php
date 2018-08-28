@@ -61,6 +61,9 @@
 <script src="{{asset('admin/js/sb-admin-2.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="{{asset('js/axios.min.js')}}"></script>
+<script src="{{asset('js/moment.min.js')}}"></script>
+<script src="{{asset('js/daterangepicker.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="{{asset('css/daterangepicker.css')}}"/>
 
 @yield('javascripts')
 

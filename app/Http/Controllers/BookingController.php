@@ -109,4 +109,12 @@ class BookingController extends Controller
 
         return view('booking-view-pay', compact('booking'));
     }
+
+    public function editServiceDate(Booking $booking, Request $request)
+    {
+        $booking->service_date = $request->service_date;
+        $booking->save();
+
+        return response()->json(['success' => true]);
+    }
 }

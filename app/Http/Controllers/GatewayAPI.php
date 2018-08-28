@@ -91,11 +91,8 @@ class GatewayAPI extends Controller
                         $sms->type = Gateway\EnvayaSMS::MESSAGE_TYPE_SMS;
                         $sms->priority = 1;
                         $messages[] = $sms;
-//                        if($messages)
-//                        {
-//                        }
-                        $events[] = new Gateway\EnvayaSMS_Event_Send($messages);
 
+                        $events[] = new Gateway\EnvayaSMS_Event_Send($messages);
                     }
                 }
                 return response()->json(array(
@@ -111,7 +108,7 @@ class GatewayAPI extends Controller
 //			   		$file = Storage::get($dir[$i]);
 //
 //		                $data = json_decode(Storage::get($dir[$i]));
-//		                if ($data)
+//		                if($data)
 //		                {
 //		                    $sms = new EnvayaSMS_OutgoingMessage();
 //		                    $sms->id = $data->id;

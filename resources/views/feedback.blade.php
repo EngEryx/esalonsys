@@ -21,7 +21,6 @@
                         <div class="card-body">
                             <form method="POST" action="{{ route('feedback.save') }}" aria-label="{{ __('Register') }}">
                                 @csrf
-
                                 <div class="form-group">
                                     <label for="feed_type">Feedback type</label>
                                     <select class="form-control" name="feed_type" id="feed_type">
@@ -32,7 +31,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="message">{{ __('') }}</label>
+                                    <label for="message">{{ __('Message') }}</label>
 
                                     <textarea class="form-control{{ $errors->has('message') ? ' is-invalid' : '' }}" name="message" required></textarea>
 

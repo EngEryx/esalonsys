@@ -7,7 +7,7 @@
 </head>
 <body>
 <h3>eSalon Service and Product Sales</h3>
-<table border="1" cellspacing="0" cellpadding="0" width="100%">
+<table border="1" cellspacing="0" cellpadding="1" width="100%">
     <thead>
     <tr>
         <th>#</th>
@@ -16,6 +16,7 @@
         <th>Order Status</th>
         <th>Cost</th>
         <th>Date Placed</th>
+        <th>Service Date</th>
     </tr>
     </thead>
     <tbody>
@@ -41,6 +42,9 @@
                 <td>{{$booking->total_cost}}</td>
                 <td>
                     {{ $booking->created_at }}
+                </td>
+                <td>
+                    {!! $booking->service_date_status !!}
                 </td>
             </tr>
         @endforeach

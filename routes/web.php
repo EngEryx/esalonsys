@@ -37,6 +37,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','admins']],function(){
     Route::post('products/{salonitem}/delete', 'AdminController@deleteProduct')->name('admin.products.delete');
     Route::get('products/{salonitem}/edit', 'AdminController@editProduct')->name('admin.products.edit');
     Route::post('products/{salonitem}/edit/save', 'AdminController@saveEditProduct')->name('admin.products.edit.save');
+    Route::post('/bookings/service/{booking}/date/edit', 'BookingController@editServiceDate')->name('frontend.booking.service-date');
+
     Route::get('feedback',function(){
         $feedbacks = \App\Feedback::all();
         return view('admin.feedback',compact('feedbacks'));

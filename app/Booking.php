@@ -61,4 +61,17 @@ class Booking extends Model
     {
         return $this->id.' '.$this->salonitem_name;
     }
+
+    public function getBookingUrlAttribute()
+    {
+        return route('frontend.booking.service-date', $this);
+    }
+
+    public function getServiceDateStatusAttribute()
+    {
+        if($this->service_date != ''){
+            return "<span><i class='fa fa-clock-o'></i> {$this->service_date}</span>";
+        }
+        return "--";
+    }
 }
